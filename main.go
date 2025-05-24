@@ -4,6 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	_ "modernc.org/sqlite"
+	"golang.org/x/text/language"
+	"golang.org/x/text/message"
 )
 
 func main() {
@@ -21,5 +23,9 @@ func main() {
 		panic(fmt.Sprintf("failed to create table: %v", err))
 	}
 
-	fmt.Println("SQLite database initialized without CGO.")
+	// Locale-aware number formatting example
+	p := message.NewPrinter(language.English)
+	amount := 1234567.89
+	fmt.Println("Locale-aware formatted number:")
+	p.Printf("%v\n", amount)
 }
